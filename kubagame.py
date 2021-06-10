@@ -53,52 +53,49 @@ class Balls:
     def balls(self):
         # no == empty slot
         self.arr = np.array(
-            [['w1','w2','no ','no ','no ','B1','B2'],
-            ['w3', 'w4','no ','R1 ','no ','B3','B4'],
-            ['no', 'no','R2 ','R3 ','R4 ','no','no'],
-            ['no', 'R5','R6 ','R7 ','R8 ','R9','no'],
-            ['no', 'no','R10','R11','R12','no','no'],
-            ['B5', 'B6','no ','R13','no ','W5','W6'],
-            ['B7', 'B8','no ','no ','no ','W7','W8']]
+            [['w1','w2','-- ','-- ','-- ','B1','B2'],
+            ['w3', 'w4','-- ','R1 ','-- ','B3','B4'],
+            ['--', '--','R2 ','R3 ','R4 ','--','--'],
+            ['--', 'R5','R6 ','R7 ','R8 ','R9','--'],
+            ['--', '--','R10','R11','R12','--','--'],
+            ['B5', 'B6','-- ','R13','-- ','W5','W6'],
+            ['B7', 'B8','-- ','-- ','-- ','W7','W8']]
         )
-        # fill dictionary with array values
         self.ball_dict = {
-            'W1': 'white',
-            'W2': 'white',
-            'W3': 'white',
-            'W4': 'white',
-            'W5': 'white',
-            'W6': 'white',
-            'W7': 'white',
-            'W8': 'white',
-            'B1': 'black',
-            'B2': 'black',
-            'B3': 'black',
-            'B4': 'black',
-            'B5': 'black',
-            'B6': 'black',
-            'B7': 'black',
-            'B8': 'black',
-            'R1': 'red',
-            'R2': 'red',
-            'R3': 'red',
-            'R4': 'red',
-            'R5': 'red',
-            'R6': 'red',
-            'R7': 'red',
-            'R8': 'red',
-            'R9': 'red',
-            'R10': 'red',
-            'R11': 'red',
-            'R12': 'red',
-            'R13': 'red',
-            'no':  '-'
+            'W1': self.arr[0][0],
+            'W2': self.arr[0][1],
+            'W3': self.arr[1][0],
+            'W4': self.arr[1][1],
+            'W5': self.arr[5][5],
+            'W6': self.arr[5][6],
+            'W7': self.arr[6][5],
+            'W8': self.arr[6][6],
+            'B1': self.arr[0][5],
+            'B2': self.arr[0][6],
+            'B3': self.arr[1][5],
+            'B4': self.arr[1][6],
+            'B5': self.arr[5][0],
+            'B6': self.arr[5][1],
+            'B7': self.arr[6][0],
+            'B8': self.arr[6][1],
+            'R1': self.arr[1][3],
+            'R2': self.arr[2][2],
+            'R3': self.arr[2][3],
+            'R4': self.arr[2][4],
+            'R5': self.arr[3][1],
+            'R6': self.arr[3][2],
+            'R7': self.arr[3][3],
+            'R8': self.arr[3][4],
+            'R9': self.arr[3][5],
+            'R10': self.arr[4][2],
+            'R11': self.arr[4][3],
+            'R12': self.arr[4][4],
+            'R13': self.arr[5][3],
+            'no':  '--'
 
         
 
         }
-        # pandas initializer
-
         return self.ball_dict
 class Board(Balls):
     def __init__(self):
@@ -110,12 +107,28 @@ class Board(Balls):
     def shift_balls(self):
         # only method left
         ball = input("Enter ball to move...")
-        # move = input("Enter direction to move towards (up/down)...")
-        # moves = input("Enter number of moves...")
+        direction = input("Enter direction to move towards (up/down/left/right)...")
+        # moves = int(input("Enter number of moves..."))
         if ball == 'w1'.upper() or ball == 'w1':
             # if self.arr[0][0]:
-            return self.arr[0][0]
-        # return self.ball_dict['W1']
+            if direction == 'down':
+                # if moves == 1:
+                if self.arr[1][0] != '-' or self.arr[1][0] != 'no':
+                    self.arr[2][0] = self.arr[2][0].replace(self.arr[2][0],self.arr[1][0])
+                    self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.arr[0][0])
+                    self.arr[0][0] = self.arr[0][0].replace(self.arr[0][0], self.ball_dict['no'])
+                    return  self.arr
+            if direction == 'right':
+                if self.arr[1][0] != '-' or self.arr[1][0] != 'no':
+                    self.arr[0][2] = self.arr[0][2].replace(self.arr[0][2],self.arr[0][1])
+                    self.arr[0][1] = self.arr[0][1].replace(self.arr[0][1], self.arr[0][0])
+                    self.arr[0][0] = self.arr[0][0].replace(self.arr[0][0], self.ball_dict['no'])
+                    return self.arr
+            if direction == 'up' or direction == 'left':
+                return "It can't move that way right now :0 ....."
+                
+# more directions
+        
         
         
 
