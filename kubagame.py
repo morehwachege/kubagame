@@ -10,7 +10,7 @@ def display_instruct():
                 Welcome to the greatest intellectual challenge of all time: Kuba Game
                 This will be a showdown between your human brain and my silicon processor.
                 You will make your move known by entering a number, 0-49. The number
-                will corresponde to the board position as illustrated:
+                will correspond to the board position as illustrated:
                                 W | W | - | - | - | B | B |
                                 ---------------------------
                                 W | W | - | R | - | B | B |
@@ -39,10 +39,6 @@ class Player:
             raise Exception('Both players can\'t have same color')
         else:
             return self.playerA[0] + f' is {self.playerA[1]} \n' + self.playerB[0] + f' is {self.playerB[1]}'
-        # if self.playerB[1] == 'white':
-        #     return self.playerB[0] +' is white'
-        # else:
-        #     return self.playerB[0] + f' is {self.playerB[1]}'
         return "Welcome to Kuba Game ..."
     def play(self):
         # self.turn = f"It's {"
