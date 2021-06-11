@@ -5,28 +5,28 @@ import pandas as pd
 
 def display_instruct():
     """Display game instructions."""
-    return 
-    """
-    Welcome to the greatest intellectual challenge of all time: Kuba Game
-    This will be a showdown between your human brain and my silicon processor.
-    You will make your move known by entering a number, 0-49. The number
-    will corresponde to the board position as illustrated:
-                      W | W | - | - | - | B | B |
-                      ---------------------------
-                      W | W | - | R | - | B | B |
-                      ---------------------------
-                      - | - | R | R | R | - | - |
-                      ---------------------------
-                      - | R | R | R | R | R | - |
-                      ---------------------------
-                      - | - | R | R | R | - | - |
-                      ---------------------------
-                      B | B | - | R | - | W | W |
-                      ---------------------------
-                      B | B | - | - | - | W | W |
-                      ---------------------------
-    Prepare yourself, human. The ultimate battle is about to begin. \n
-    """
+
+    return  """
+                Welcome to the greatest intellectual challenge of all time: Kuba Game
+                This will be a showdown between your human brain and my silicon processor.
+                You will make your move known by entering a number, 0-49. The number
+                will corresponde to the board position as illustrated:
+                                W | W | - | - | - | B | B |
+                                ---------------------------
+                                W | W | - | R | - | B | B |
+                                ---------------------------
+                                - | - | R | R | R | - | - |
+                                ---------------------------
+                                - | R | R | R | R | R | - |
+                                ---------------------------
+                                - | - | R | R | R | - | - |
+                                ---------------------------
+                                B | B | - | R | - | W | W |
+                                ---------------------------
+                                B | B | - | - | - | W | W |
+                                ---------------------------
+                Prepare yourself, human. The ultimate battle is about to begin. \n
+            """
 class Player:
     def __init__(self):
         self.playerA = sys.argv[1]
@@ -34,9 +34,8 @@ class Player:
     def get_player(self):
         self.playerA = self.playerA.split(',')
         self.playerB = self.playerB.split(',')
-        if self.playerA[1] == 'black':
-            return self.playerA[0] +' is black' + self.playerB[0] + f' is {self.playerB[1]}'
-        elif self.playerA[1] == self.playerB[1]:
+        
+        if self.playerA[1] == self.playerB[1]:
             raise Exception('Both players can\'t have same color')
         else:
             return self.playerA[0] + f' is {self.playerA[1]} \n' + self.playerB[0] + f' is {self.playerB[1]}'
@@ -45,6 +44,9 @@ class Player:
         # else:
         #     return self.playerB[0] + f' is {self.playerB[1]}'
         return "Welcome to Kuba Game ..."
+    def play(self):
+        # self.turn = f"It's {"
+        pass
 class Balls:
     def __init__(self):
         self.white = 'W'
@@ -98,6 +100,9 @@ class Balls:
         }
         return self.ball_dict
 class Board(Balls):
+    """
+    This is the board class for the balls and moving the elements. Also contains most of the logic
+    """
     def __init__(self):
         Balls.__init__(self)
         Balls.balls(self)
@@ -106,20 +111,21 @@ class Board(Balls):
         return string.join(self.arr[0]).upper() + '\n' + string.join(self.arr[1]).upper() + '\n' +string.join(self.arr[2]).upper() + '\n' + string.join(self.arr[3]).upper() + '\n' + string.join(self.arr[4]).upper() + '\n' + string.join(self.arr[5]).upper() + '\n' + string.join(self.arr[6]).upper()
     def shift_balls(self):
         # only method left
-        ball = input("Enter ball to move...")
-        direction = input("Enter direction to move towards (up/down/left/right)...")
+        # ball = input("Enter ball to move...")
+        # direction = input("Enter direction to move towards (up/down/left/right)...")
         # moves = int(input("Enter number of moves..."))
         if ball == 'w1'.upper() or ball == 'w1':
             # if self.arr[0][0]:
             if direction == 'down':
                 # if moves == 1:
-                if self.arr[1][0] != '-' or self.arr[1][0] != 'no':
+                if self.arr[1][0] != '--':
                     self.arr[2][0] = self.arr[2][0].replace(self.arr[2][0],self.arr[1][0])
                     self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.arr[0][0])
                     self.arr[0][0] = self.arr[0][0].replace(self.arr[0][0], self.ball_dict['no'])
                     return  self.arr
+                
             if direction == 'right':
-                if self.arr[1][0] != '-' or self.arr[1][0] != 'no':
+                if self.arr[1][0] != '--' or self.arr[1][0] != 'no':
                     self.arr[0][2] = self.arr[0][2].replace(self.arr[0][2],self.arr[0][1])
                     self.arr[0][1] = self.arr[0][1].replace(self.arr[0][1], self.arr[0][0])
                     self.arr[0][0] = self.arr[0][0].replace(self.arr[0][0], self.ball_dict['no'])
@@ -139,9 +145,21 @@ if __name__ == "__main__":
     #     print(player)
     # except IndexError as err:
     #     print("run example\n'python kubagame.py ken,black mary,white'")
-
-    player_obj = Board()
-    player = player_obj.shift_balls()
-    print(player)
+    player_obj = Player()
+    first_player = player_obj.playerA.split(',')[0].capitalize()
+    print(display_instruct())
+    print(f"""
+    Player {first_player} begins the play
+    """)
+    mover_obj = Board()
+    running = True
+    while running:
+        ball = input("Enter ball to move...")
+        direction = input("Enter direction to move towards (up/down/left/right)...")
+        mover = mover_obj.shift_balls()
+        print(mover)
+        # running = False
     
     
+    # player = player.play()
+    print(mover)
