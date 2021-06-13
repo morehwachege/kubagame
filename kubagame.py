@@ -11,20 +11,20 @@ def display_instruct():
                 This will be a showdown between your human brain and my silicon processor.
                 You will make your move known by entering a number, 0-49. The number
                 will correspond to the board position as illustrated:
-                                W | W | - | - | - | B | B |
-                                ---------------------------
-                                W | W | - | R | - | B | B |
-                                ---------------------------
-                                - | - | R | R | R | - | - |
-                                ---------------------------
-                                - | R | R | R | R | R | - |
-                                ---------------------------
-                                - | - | R | R | R | - | - |
-                                ---------------------------
-                                B | B | - | R | - | W | W |
-                                ---------------------------
-                                B | B | - | - | - | W | W |
-                                ---------------------------
+                                W1 | W2 | --  | --  | --  | B1 | B2 |
+                                -------------------------------------
+                                W3 | W4 | --  | R1  | --  | B2 | B4 |
+                                -------------------------------------
+                                -- | -- | R2  | R3  | R4  | -- | -- |
+                                -------------------------------------
+                                -  | R5 | R6  | R7  | R8  | R9 | -- |
+                                -------------------------------------
+                                -- | -- | R10 | R11 | R12 | -- | -- |
+                                -------------------------------------
+                                B5 | B6 | --  | R13 | --  | W5 | W6 |
+                                -------------------------------------
+                                B7 | B8 | --  | --  | --  | W7 | W8 |
+                                -------------------------------------
                 Prepare yourself, human. The ultimate battle is about to begin. \n
             """
 class Player:
@@ -119,16 +119,72 @@ class Board(Balls):
                     self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.arr[0][0])
                     self.arr[0][0] = self.arr[0][0].replace(self.arr[0][0], self.ball_dict['no'])
                     return  self.arr
+                elif self.arr[1][0] == '--':
+                    self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.arr[0][0])
+                    self.arr[0][0] = self.arr[0][0].replace(self.arr[0][0], self.ball_dict['no'])
+                    return  self.arr
                 
             if direction == 'right':
-                if self.arr[1][0] != '--' or self.arr[1][0] != 'no':
+                if self.arr[0][1] != '--' and self.arr[0][2] != '--':
                     self.arr[0][2] = self.arr[0][2].replace(self.arr[0][2],self.arr[0][1])
                     self.arr[0][1] = self.arr[0][1].replace(self.arr[0][1], self.arr[0][0])
                     self.arr[0][0] = self.arr[0][0].replace(self.arr[0][0], self.ball_dict['no'])
                     return self.arr
             if direction == 'up' or direction == 'left':
                 return "It can't move that way right now :0 ....."
-                
+
+
+        if ball == 'w2'.upper() or ball == 'w2':
+            if direction == 'down':
+                if self.arr[1][1] != '--':
+                        self.arr[2][1] = self.arr[2][1].replace(self.arr[2][1],self.arr[1][1])
+                        self.arr[1][1] = self.arr[1][1].replace(self.arr[1][1], self.arr[0][1])
+                        self.arr[0][1] = self.arr[0][1].replace(self.arr[0][1], self.ball_dict['no'])
+                        return  self.arr
+            if direction == 'right':
+                if self.arr[1][1] != '--':
+                    self.arr[0][3] = self.arr[0][3].replace(self.arr[0][3],self.arr[0][2])
+                    self.arr[0][2] = self.arr[0][2].replace(self.arr[0][2], self.arr[0][1])
+                    self.arr[0][1] = self.arr[0][1].replace(self.arr[0][1], self.ball_dict['no'])
+                    return self.arr
+            if direction == 'up' or direction == 'left':
+                return "It can't move that way right now :0 ....."   
+        
+
+        if ball == 'w3'.upper() or ball == 'w3':
+            if direction == 'down':
+                if self.arr[2][0] == '--':
+                    self.arr[3][0] = self.arr[3][0].replace(self.arr[3][0],self.arr[2][0])
+                    self.arr[2][0] = self.arr[2][0].replace(self.arr[2][0], self.arr[1][0])
+                    self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.ball_dict['no'])
+                    return  self.arr        
+            if direction == 'right':
+                if self.arr[1][2] == '--' or self.arr[1][1] != '--':
+                    self.arr[1][2] = self.arr[1][2].replace(self.arr[1][2],self.arr[1][1])
+                    self.arr[1][1] = self.arr[1][1].replace(self.arr[1][1], self.arr[1][0])
+                    self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.ball_dict['no'])
+                    return self.arr
+            if direction == 'up' or direction == 'left':
+                return "It can't move that way right now :0 ....."   
+        if ball == 'w4'.upper() or ball == 'w4':
+            if direction == 'down':
+                if self.arr[2][1] == '--':
+                    self.arr[2][1] = self.arr[2][1].replace(self.arr[2][1], self.arr[1][1])
+                    self.arr[1][1] = self.arr[1][1].replace(self.arr[1][1], self.ball_dict['no'])
+                    return  self.arr
+                elif self.arr[2][1] != '--':
+                    self.arr[3][1] = self.arr[3][1].replace(self.arr[3][1],self.arr[2][1])
+                    self.arr[2][1] = self.arr[2][1].replace(self.arr[2][1], self.arr[1][1])
+                    self.arr[1][1] = self.arr[1][1].replace(self.arr[1][1], self.ball_dict['no'])
+                    return  self.arr   
+            if direction == 'right':
+                if self.arr[1][2] == '--' or self.arr[1][1] != '--':
+                    self.arr[1][2] = self.arr[1][2].replace(self.arr[1][2],self.arr[1][1])
+                    self.arr[1][1] = self.arr[1][1].replace(self.arr[1][1], self.arr[1][0])
+                    self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.ball_dict['no'])
+                    return self.arr
+            if direction == 'up' or direction == 'left':
+                return "It can't move that way right now :0 ....."   
 # more directions
         
         
@@ -143,17 +199,24 @@ if __name__ == "__main__":
     #     print("run example\n'python kubagame.py ken,black mary,white'")
     player_obj = Player()
     first_player = player_obj.playerA.split(',')[0].capitalize()
+    second_player = player_obj.playerB.split(',')[0].capitalize()
     print(display_instruct())
     print(f"""
     Player {first_player} begins the play
     """)
     mover_obj = Board()
     running = True
+    turn = 1
     while running:
         ball = input("Enter ball to move...")
         direction = input("Enter direction to move towards (up/down/left/right)...")
         mover = mover_obj.shift_balls()
+        turn += 1
         print(mover)
+        if turn % 2 != 0:
+            print(f"{first_player} is playing...")
+        else:
+            print(f"{second_player} is playing...")
         # running = False
     
     
