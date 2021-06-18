@@ -17,7 +17,7 @@ def display_instruct():
                                 -------------------------------------
                                 -- | -- | R2  | R3  | R4  | -- | -- |
                                 -------------------------------------
-                                -  | R5 | R6  | R7  | R8  | R9 | -- |
+                                -- | R5 | R6  | R7  | R8  | R9 | -- |
                                 -------------------------------------
                                 -- | -- | R10 | R11 | R12 | -- | -- |
                                 -------------------------------------
@@ -118,7 +118,14 @@ class Board(Balls):
                     self.arr[2][0] = self.arr[2][0].replace(self.arr[2][0],self.arr[1][0])
                     self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.arr[0][0])
                     self.arr[0][0] = self.arr[0][0].replace(self.arr[0][0], self.ball_dict['no'])
-                    return  self.arr
+                    return self.arr
+                    # moves
+                elif self.arr[0][0] == '--':
+                    if self.arr[3][0] ==  '--':
+                        self.arr[3][0] = self.arr[3][0].replace(self.arr[3][0],self.arr[2][0])
+                        self.arr[2][0] = self.arr[2][0].replace(self.arr[2][0], self.arr[1][0])
+                        self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.ball_dict['no'])
+                        return  self.arr
                 elif self.arr[1][0] == '--':
                     self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.arr[0][0])
                     self.arr[0][0] = self.arr[0][0].replace(self.arr[0][0], self.ball_dict['no'])
@@ -157,7 +164,14 @@ class Board(Balls):
                     self.arr[3][0] = self.arr[3][0].replace(self.arr[3][0],self.arr[2][0])
                     self.arr[2][0] = self.arr[2][0].replace(self.arr[2][0], self.arr[1][0])
                     self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.ball_dict['no'])
-                    return  self.arr        
+                    return  self.arr 
+                elif self.arr[2][0] != '--':
+                    if self.arr[4][0] == '--':
+                        self.arr[4][0] = self.arr[4][0].replace(self.arr[4][0], self.arr[3][0])
+                    self.arr[3][0] = self.arr[3][0].replace(self.arr[3][0],self.arr[2][0])
+                    self.arr[2][0] = self.arr[2][0].replace(self.arr[2][0], self.arr[1][0])
+                    self.arr[1][0] = self.arr[1][0].replace(self.arr[1][0], self.ball_dict['no'])
+                    return  self.arr 
             if direction == 'right':
                 if self.arr[1][2] == '--' or self.arr[1][1] != '--':
                     self.arr[1][2] = self.arr[1][2].replace(self.arr[1][2],self.arr[1][1])
@@ -185,6 +199,19 @@ class Board(Balls):
                     return self.arr
             if direction == 'up' or direction == 'left':
                 return "It can't move that way right now :0 ....."   
+        if ball == 'w5'.upper() or ball == 'w5':
+            if direction == 'up':
+                if self.arr[4][5] == '--':
+                    self.arr[4][5]= self.arr[4][5].replace(self.arr[4][5], self.arr[5][5])
+                    self.arr[5][5]= self.arr[5][5].replace(self.arr[5][5], self.ball_dict['no'])
+                    return self.arr
+        # if ball == 'em1' or ball == 'em1'.upper():
+        #     if direction == 'down':
+        #         self.arr[4][0] = self.arr[4][0].replace(self.arr[4][0],self.arr[3][0])
+        #         self.arr[3][0] = self.arr[3][0].replace(self.arr[3][0],self.arr[2][0])
+        #         self.arr[2][0] = self.arr[2][0].replace(self.arr[2][0], self.ball_dict['no'])
+        #         return self.arr
+        
 # more directions
         
         
@@ -222,3 +249,4 @@ if __name__ == "__main__":
     
     # player = player.play()
     print(mover)
+    
